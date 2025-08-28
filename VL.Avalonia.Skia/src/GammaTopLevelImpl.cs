@@ -5,6 +5,7 @@ using Avalonia.Input.Raw;
 using Avalonia.Platform;
 using Avalonia.Rendering.Composition;
 using Avalonia.Skia;
+using SkiaSharp;
 using System.Diagnostics;
 using VL.Lib.IO.Notifications;
 using VL.Skia;
@@ -196,7 +197,7 @@ namespace VL.Avalonia.Skia
         public Action? Closed { get; set; }
         public Action? LostFocus { get; set; }
 
-        public WindowTransparencyLevel TransparencyLevel { get; set; } = WindowTransparencyLevel.None;
+        public WindowTransparencyLevel TransparencyLevel { get; set; } = WindowTransparencyLevel.Transparent;
 
         // https://github.com/MrJul/Estragonia/blob/0aa807421c9e52bc56128c69798ffc11093f0a61/src/JLeb.Estragonia/GodotTopLevelImpl.cs#L76
         public AcrylicPlatformCompensationLevels AcrylicCompensationLevels { get; } = new(1.0, 1.0, 1.0);
@@ -212,6 +213,8 @@ namespace VL.Avalonia.Skia
             _callerInfos.Clear();
             _callerInfos.Add(caller);
 
+
+            caller.Canvas.Clear(SKColor.Empty);
             caller.Canvas.Save();
             try
             {

@@ -2090,5 +2090,20 @@ namespace VL.Avalonia.Styles
 
     #endregion
 
+    #region TopLevel
+
+    [ProcessNode(Name = "SetTransparencyBackgroundFallback")]
+    public class SetTransparencyBackgroundFallback : StyleSetter<IBrush>
+    {
+        public SetTransparencyBackgroundFallback() : base("TransparencyBackgroundFallback") { }
+    }
+
+    [ProcessNode(Name = "SetTransparencyBackgroundFallback")]
+    public class SetTransparencyBackgroundFallbackColor : StyleSetterBrushColor
+    {
+        public SetTransparencyBackgroundFallbackColor() : base("TransparencyBackgroundFallback") { }
+    }
+
+    #endregion
 
 }

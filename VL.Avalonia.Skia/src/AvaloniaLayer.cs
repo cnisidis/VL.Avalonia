@@ -1,8 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls.Embedding;
+using Avalonia.Media;
 using Avalonia.Rendering.Composition;
 using Avalonia.Skia;
 using Avalonia.Styling;
+using VL.Avalonia.Helpers;
+using VL.Avalonia.Styles;
 using VL.Core;
 using VL.Core.Import;
 using VL.Lib.IO.Notifications;
@@ -30,6 +33,8 @@ namespace VL.Avalonia.Skia
             topLevelImpl = new GammaTopLevelImpl(locator.GetRequiredService<Compositor>());
             controlRoot = new EmbeddableControlRoot(topLevelImpl);
 
+            RenderOptions.SetRequiresFullOpacityHandling(controlRoot, true);
+
             onSetupApplication?.Invoke(AvaloniaInitializer.Instance);
         }
 
@@ -51,6 +56,29 @@ namespace VL.Avalonia.Skia
                 }
 
                 _content = content;
+            }
+        }
+
+        protected Optional<IAvaloniaStyle> _style;
+        [Fragment(Order = -7)]
+        /// <param name="style">
+        /// Style Setters
+        /// </param>
+        public void SetStyle(Optional<IAvaloniaStyle> style)
+        {
+            if (_style != style)
+            {
+                if (style.HasValue)
+                {
+                    controlRoot.TryUpdateStyles(style.Value);
+
+                }
+                else
+                {
+                    controlRoot.Styles.Clear();
+                }
+
+                _style = style;
             }
         }
 

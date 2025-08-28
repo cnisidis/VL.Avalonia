@@ -43,7 +43,11 @@ public class AvaloniaSourceGenerator : IIncrementalGenerator
 #if DEBUG
         if (!Debugger.IsAttached)
         {
+<<<<<<< Updated upstream
             //Debugger.Launch();
+=======
+            // Debugger.Launch();
+>>>>>>> Stashed changes
         }
 #endif 
         var attributesSyntaxProvider = context.SyntaxProvider.CreateSyntaxProvider(
